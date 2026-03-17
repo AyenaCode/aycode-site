@@ -1,0 +1,135 @@
+---
+const techs = ['React Native', 'Next.js', 'Kubernetes', 'CI/CD', 'TypeScript'];
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background:#050508;">
+
+  <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" style="pointer-events:none;"></canvas>
+
+  <div id="hero-fallback" class="absolute inset-0 hidden" style="background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.25) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(6,182,212,0.15) 0%, transparent 60%), radial-gradient(ellipse at 50% 80%, rgba(236,72,153,0.12) 0%, transparent 60%);"></div>
+
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none" style="background:rgba(124,58,237,0.12);"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none" style="background:rgba(6,182,212,0.08);"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+
+    <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full card-glass mb-8 gsap-reveal">
+      <span class="w-2 h-2 rounded-full animate-pulse" style="background:#06b6d4;"></span>
+      <span class="text-sm font-medium" style="color:#94a3b8;">Disponible pour de nouvelles missions</span>
+    </div>
+
+    <h1 class="hero-title font-display font-bold leading-tight mb-6 gsap-reveal" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+      Votre idée mérite une<br />
+      <span class="gradient-text">exécution sans compromis.</span>
+    </h1>
+
+    <p class="hero-subtitle text-xl max-w-2xl mx-auto mb-10 gsap-reveal leading-relaxed" style="color:#94a3b8;">
+      Développeur <strong class="text-white">React Native & Next.js</strong>
+      · DevOps <strong class="text-white">Kubernetes</strong>
+      <br class="hidden md:block" />
+      Je transforme vos projets en produits qui scalent.
+    </p>
+
+    <div class="hero-cta gsap-reveal">
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-display font-semibold text-lg text-white transition-all duration-300 hover:scale-105"
+        style="background: linear-gradient(135deg, #7c3aed, #06b6d4, #ec4899); box-shadow: 0 0 40px rgba(124,58,237,0.3);"
+      >
+        Démarrons ensemble
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="hero-tech flex flex-wrap justify-center gap-3 mt-16 gsap-reveal">
+      {techs.map(tech => (
+        <span class="px-4 py-2 rounded-lg card-glass text-sm font-medium" style="color:#94a3b8;">{tech}</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" style="opacity:0.4;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 5v14M5 12l7 7 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<script>
+  import * as THREE from 'three';
+  import gsap from 'gsap';
+
+  // ── Three.js ─────────────────────────────────────────────────────────────
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+  const fallback = document.getElementById('hero-fallback') as HTMLElement;
+
+  const hasWebGL = (() => {
+    try {
+      return !!(document.createElement('canvas').getContext('webgl'));
+    } catch { return false; }
+  })();
+
+  if (!hasWebGL) {
+    canvas.style.display = 'none';
+    fallback.classList.remove('hidden');
+  } else {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const count = 1800;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    const palette = [new THREE.Color('#7c3aed'), new THREE.Color('#06b6d4'), new THREE.Color('#ec4899')];
+
+    for (let i = 0; i < count; i++) {
+      positions[i * 3]     = (Math.random() - 0.5) * 22;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 22;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 22;
+      const c = palette[Math.floor(Math.random() * 3)];
+      colors[i * 3] = c.r; colors[i * 3 + 1] = c.g; colors[i * 3 + 2] = c.b;
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    const mat = new THREE.PointsMaterial({ size: 0.05, vertexColors: true, transparent: true, opacity: 0.75 });
+    const particles = new THREE.Points(geo, mat);
+    scene.add(particles);
+    camera.position.z = 5;
+
+    const clock = new THREE.Clock();
+    let animId: number;
+    function animate() {
+      animId = requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      particles.rotation.x = t * 0.04;
+      particles.rotation.y = t * 0.07;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    document.addEventListener('astro:before-swap', () => {
+      cancelAnimationFrame(animId);
+      renderer.dispose();
+    });
+  }
+
+  // ── GSAP reveal ──────────────────────────────────────────────────────────
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  tl.to('.hero-badge',    { opacity: 1, y: 0, duration: 0.8, delay: 0.3 })
+    .to('.hero-title',    { opacity: 1, y: 0, duration: 1.0 }, '-=0.4')
+    .to('.hero-subtitle', { opacity: 1, y: 0, duration: 0.9 }, '-=0.5')
+    .to('.hero-cta',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.4')
+    .to('.hero-tech',     { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
+</script>

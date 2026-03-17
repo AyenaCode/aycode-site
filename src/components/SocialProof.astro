@@ -1,0 +1,85 @@
+---
+const stats = [
+  { value: 5,  suffix: '+', label: "ans d'expérience",  sub: 'en production' },
+  { value: 20, suffix: '+', label: 'projets livrés',    sub: 'mobile, web & infra' },
+  { value: 0,  suffix: '',  label: 'projet abandonné',  sub: 'engagement total' },
+];
+
+const testimonials = [
+  {
+    initial: 'A',
+    name: 'Client A',
+    role: 'CTO, Startup SaaS',
+    text: '"AyCode a livré notre app mobile en un temps record. Code propre, communication parfaite, zéro surprise."',
+  },
+  {
+    initial: 'B',
+    name: 'Client B',
+    role: 'Fondateur, E-commerce',
+    text: '"Notre infra K8s tourne parfaitement depuis 6 mois. Zéro incident en prod. Je recommande à 100%."',
+  },
+];
+---
+
+<section id="proof" class="section-padding px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="grid grid-cols-3 gap-8 mb-20">
+      {stats.map((stat) => (
+        <div class="text-center gsap-reveal">
+          <div class="font-display font-bold mb-2" style="font-size:clamp(2.5rem,6vw,5rem);line-height:1;">
+            <span class="count-up gradient-text" data-count={stat.value} data-suffix={stat.suffix}>0</span>
+          </div>
+          <p class="font-semibold text-white text-lg">{stat.label}</p>
+          <p class="text-sm" style="color:#64748b;">{stat.sub}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {testimonials.map((t) => (
+        <div class="card-glass rounded-2xl p-8 gsap-reveal gradient-border">
+          <p class="text-lg italic leading-relaxed mb-6" style="color:#cbd5e1;">{t.text}</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0"
+              style="background:linear-gradient(135deg,#7c3aed,#06b6d4);">
+              {t.initial}
+            </div>
+            <div>
+              <p class="font-semibold text-white text-sm">{t.name}</p>
+              <p class="text-xs" style="color:#64748b;">{t.role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { CountUp } from 'countup.js';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to('#proof .gsap-reveal', {
+    opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '#proof', start: 'top 80%' },
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        const end = parseInt(el.dataset.count || '0');
+        const suffix = el.dataset.suffix || '';
+        const cu = new CountUp(el, end, { duration: 2.5, useEasing: true, suffix });
+        if (!cu.error) cu.start();
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.count-up').forEach((el) => observer.observe(el));
+</script>

@@ -1,0 +1,227 @@
+---
+---
+
+<section id="contact" class="section-padding px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="text-center mb-12">
+      <p class="text-sm font-medium uppercase tracking-widest mb-4" style="color:#ec4899;">Contact</p>
+      <h2 class="font-display font-bold text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.5rem);">
+        Décrivez votre projet —<br />
+        <span class="gradient-text">je vous réponds sous 24h.</span>
+      </h2>
+      <p style="color:#94a3b8;">Remplissez le formulaire ci-dessous pour démarrer la conversation.</p>
+    </div>
+
+    <div class="card-glass rounded-3xl p-8 md:p-12 gradient-border">
+
+      <!-- Progress bar -->
+      <div class="flex items-center justify-between mb-10">
+        <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.08);">
+          <div id="progress-fill" class="h-full rounded-full transition-all duration-500 ease-out" style="width:0%;background:linear-gradient(90deg,#7c3aed,#06b6d4,#ec4899);"></div>
+        </div>
+        <span id="step-counter" class="ml-4 text-sm font-medium shrink-0" style="color:#64748b;">1 / 3</span>
+      </div>
+
+      <form id="contact-form" novalidate>
+        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
+        <!-- Step 1 -->
+        <div class="form-step" data-step="1">
+          <h3 class="font-display font-semibold text-white text-xl mb-8">Votre projet</h3>
+
+          <div class="mb-8">
+            <label class="block text-sm font-medium mb-3" style="color:#94a3b8;">Type de projet</label>
+            <div class="grid grid-cols-2 gap-3">
+              {['Application mobile', 'Site / Web App', 'DevOps & Infra', 'Full-stack'].map((t) => (
+                <label class="type-option flex items-center gap-3 p-4 rounded-xl card-glass cursor-pointer transition-all duration-200 hover:border-cyan-500/40">
+                  <input type="radio" name="project_type" value={t} class="sr-only" />
+                  <span class="w-4 h-4 rounded-full border shrink-0 transition-all duration-200" style="border-color:#475569;" data-radio></span>
+                  <span class="text-sm" style="color:#cbd5e1;">{t}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label class="block text-sm font-medium mb-3" style="color:#94a3b8;">Budget estimé</label>
+            <div class="grid grid-cols-2 gap-3">
+              {['< 5 000 €', '5 000 – 15 000 €', '15 000 – 50 000 €', '+ 50 000 €'].map((b) => (
+                <label class="budget-option flex items-center gap-3 p-4 rounded-xl card-glass cursor-pointer transition-all duration-200 hover:border-cyan-500/40">
+                  <input type="radio" name="budget" value={b} class="sr-only" />
+                  <span class="w-4 h-4 rounded-full border shrink-0 transition-all duration-200" style="border-color:#475569;" data-radio></span>
+                  <span class="text-sm" style="color:#cbd5e1;">{b}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <button type="button" data-next class="w-full py-4 rounded-2xl font-display font-semibold text-white transition-all duration-200 hover:scale-[1.02]"
+            style="background:linear-gradient(135deg,#7c3aed,#06b6d4,#ec4899);">
+            Étape suivante →
+          </button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="form-step hidden" data-step="2">
+          <h3 class="font-display font-semibold text-white text-xl mb-8">Votre besoin</h3>
+
+          <div class="mb-8">
+            <label class="block text-sm font-medium mb-3" style="color:#94a3b8;">Délai souhaité</label>
+            <div class="grid grid-cols-2 gap-3">
+              {['Le plus tôt possible', '1 – 3 mois', '3 – 6 mois', '6 mois +'].map((d) => (
+                <label class="delai-option flex items-center gap-3 p-4 rounded-xl card-glass cursor-pointer transition-all duration-200 hover:border-violet-600/40">
+                  <input type="radio" name="deadline" value={d} class="sr-only" />
+                  <span class="w-4 h-4 rounded-full border shrink-0 transition-all duration-200" style="border-color:#475569;" data-radio></span>
+                  <span class="text-sm" style="color:#cbd5e1;">{d}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label for="description" class="block text-sm font-medium mb-3" style="color:#94a3b8;">Description du projet</label>
+            <textarea id="description" name="description" rows="5"
+              placeholder="Décrivez votre projet, vos objectifs, votre stack existante si applicable..."
+              class="w-full rounded-2xl p-4 text-white resize-none transition-all duration-200 outline-none"
+              style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);font-family:inherit;font-size:0.9rem;color:#f1f5f9;"
+              onfocus="this.style.borderColor='rgba(124,58,237,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'"></textarea>
+          </div>
+
+          <div class="flex gap-3">
+            <button type="button" data-prev class="flex-1 py-4 rounded-2xl font-semibold transition-all duration-200"
+              style="color:#94a3b8;border:1px solid rgba(255,255,255,0.1);">← Retour</button>
+            <button type="button" data-next class="flex-[2] py-4 rounded-2xl font-display font-semibold text-white transition-all duration-200 hover:scale-[1.02]"
+              style="background:linear-gradient(135deg,#7c3aed,#06b6d4,#ec4899);">Étape suivante →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="form-step hidden" data-step="3">
+          <h3 class="font-display font-semibold text-white text-xl mb-8">Vos coordonnées</h3>
+
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2" style="color:#94a3b8;">Nom *</label>
+              <input id="name" type="text" name="name" required placeholder="Votre nom"
+                class="w-full rounded-2xl p-4 text-white outline-none transition-all duration-200"
+                style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);font-family:inherit;font-size:0.9rem;"
+                onfocus="this.style.borderColor='rgba(6,182,212,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'" />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium mb-2" style="color:#94a3b8;">Téléphone</label>
+              <input id="phone" type="tel" name="phone" placeholder="+33 6 XX XX XX XX"
+                class="w-full rounded-2xl p-4 text-white outline-none transition-all duration-200"
+                style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);font-family:inherit;font-size:0.9rem;"
+                onfocus="this.style.borderColor='rgba(6,182,212,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'" />
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label for="email" class="block text-sm font-medium mb-2" style="color:#94a3b8;">Email *</label>
+            <input id="email" type="email" name="email" required placeholder="vous@exemple.com"
+              class="w-full rounded-2xl p-4 text-white outline-none transition-all duration-200"
+              style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);font-family:inherit;font-size:0.9rem;"
+              onfocus="this.style.borderColor='rgba(6,182,212,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'" />
+          </div>
+
+          <div class="flex gap-3 mb-6">
+            <button type="button" data-prev class="flex-1 py-4 rounded-2xl font-semibold transition-all duration-200"
+              style="color:#94a3b8;border:1px solid rgba(255,255,255,0.1);">← Retour</button>
+            <button id="submit-btn" type="submit" class="flex-[2] py-4 rounded-2xl font-display font-semibold text-white transition-all duration-200 hover:scale-[1.02]"
+              style="background:linear-gradient(135deg,#7c3aed,#06b6d4,#ec4899);">
+              Envoyer mon projet →
+            </button>
+          </div>
+
+          <p class="text-xs text-center leading-relaxed" style="color:#475569;">
+            En soumettant ce formulaire, vous acceptez d'être contacté par AyCode concernant votre projet.
+            Vos données (nom, email, téléphone) sont utilisées uniquement à cette fin.
+          </p>
+        </div>
+      </form>
+
+      <!-- Success -->
+      <div id="form-success" class="hidden text-center py-8">
+        <div class="text-6xl mb-4">🎉</div>
+        <h3 class="font-display font-bold text-2xl text-white mb-3">Message envoyé !</h3>
+        <p style="color:#94a3b8;">Je vous réponds sous 24h. À très vite !</p>
+      </div>
+
+      <!-- Error -->
+      <div id="form-error" class="hidden mt-4 p-4 rounded-2xl text-sm text-center"
+        style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#ec4899;">
+        Une erreur est survenue. Réessayez ou contactez-moi directement.
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 3;
+  const progressFill = document.getElementById('progress-fill') as HTMLElement;
+  const stepCounter  = document.getElementById('step-counter') as HTMLElement;
+
+  function showStep(step: number) {
+    document.querySelectorAll<HTMLElement>('.form-step').forEach(s => s.classList.add('hidden'));
+    document.querySelector<HTMLElement>(`.form-step[data-step="${step}"]`)?.classList.remove('hidden');
+    progressFill.style.width = `${((step - 1) / (totalSteps - 1)) * 100}%`;
+    stepCounter.textContent = `${step} / ${totalSteps}`;
+    currentStep = step;
+  }
+
+  document.querySelectorAll('[data-next]').forEach(btn =>
+    btn.addEventListener('click', () => { if (currentStep < totalSteps) showStep(currentStep + 1); })
+  );
+  document.querySelectorAll('[data-prev]').forEach(btn =>
+    btn.addEventListener('click', () => { if (currentStep > 1) showStep(currentStep - 1); })
+  );
+
+  // Radio visual state
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const name = (radio as HTMLInputElement).name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+        const dot = r.closest('label')?.querySelector('[data-radio]') as HTMLElement;
+        if (dot) { dot.style.background = ''; dot.style.borderColor = '#475569'; }
+        r.closest('label')?.classList.remove('border-cyan-500/60');
+      });
+      const dot = radio.closest('label')?.querySelector('[data-radio]') as HTMLElement;
+      if (dot) { dot.style.background = '#06b6d4'; dot.style.borderColor = '#06b6d4'; }
+    });
+  });
+
+  // Form submit
+  const form       = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn  = document.getElementById('submit-btn') as HTMLButtonElement;
+  const formSteps  = document.getElementById('contact-form') as HTMLElement;
+  const success    = document.getElementById('form-success') as HTMLElement;
+  const error      = document.getElementById('form-error') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    error.classList.add('hidden');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours...';
+
+    const endpoint = import.meta.env.PUBLIC_FORMSPREE_ID;
+    try {
+      const res = await fetch(`https://formspree.io/f/${endpoint}`, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        formSteps.classList.add('hidden');
+        success.classList.remove('hidden');
+      } else {
+        throw new Error();
+      }
+    } catch {
+      error.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer mon projet →';
+    }
+  });
+</script>

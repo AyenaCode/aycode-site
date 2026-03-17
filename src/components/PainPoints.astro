@@ -1,0 +1,62 @@
+---
+const pains = [
+  {
+    icon: '💥',
+    title: 'Une app qui plante en prod',
+    desc: 'Bugs critiques découverts par vos utilisateurs. Nuits blanches, réputation abîmée, clients perdus.',
+    accent: 'rgba(236,72,153,0.15)',
+  },
+  {
+    icon: '🐌',
+    title: 'Des déploiements qui durent des heures',
+    desc: 'Releases manuelles, risques d\'erreurs humaines, équipes paralysées à chaque mise en production.',
+    accent: 'rgba(124,58,237,0.15)',
+  },
+  {
+    icon: '👻',
+    title: 'Un prestataire fantôme',
+    desc: 'Code livré, puis silence. Pas de documentation, pas de support. Vous repartez de zéro.',
+    accent: 'rgba(6,182,212,0.12)',
+  },
+];
+---
+
+<section class="section-padding px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="text-sm font-medium uppercase tracking-widest mb-4" style="color:#64748b;">Le problème</p>
+      <h2 class="font-display font-bold text-white gsap-reveal" style="font-size:clamp(1.8rem,3.5vw,2.5rem);">
+        Vous méritez mieux que ça.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {pains.map((pain) => (
+        <div class="pain-card card-glass rounded-2xl p-8 gsap-reveal" style={`background: linear-gradient(135deg, ${pain.accent}, rgba(10,10,20,0.8));`}>
+          <div class="text-4xl mb-5">{pain.icon}</div>
+          <h3 class="font-display font-semibold text-white text-lg mb-3">{pain.title}</h3>
+          <p class="text-sm leading-relaxed" style="color:#94a3b8;">{pain.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-16 gsap-reveal">
+      <p class="text-lg" style="color:#94a3b8;">
+        Avec <span class="gradient-text font-semibold">AyCode</span>, ces problèmes n'arrivent pas.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to('.pain-card', {
+    opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out',
+    scrollTrigger: { trigger: '.pain-card', start: 'top 85%' },
+  });
+</script>

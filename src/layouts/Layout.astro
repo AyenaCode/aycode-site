@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "AyCode — Développeur React Native, Next.js & DevOps Freelance",
+  description = "AyCode — Développeur freelance React Native, Next.js & DevOps (Kubernetes, CI/CD). Je transforme vos idées en produits mobiles et web qui scalent. Devis gratuit.",
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://aycode.dev';
+const ogImage = `${siteUrl}/og-image.png`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: "AyCode",
+      jobTitle: "Développeur Freelance",
+      url: siteUrl,
+      knowsAbout: ["React Native", "Next.js", "Kubernetes", "CI/CD", "DevOps"],
+    },
+    {
+      "@type": "Service",
+      serviceType: "Développement Mobile & Web",
+      provider: { "@type": "Person", name: "AyCode" },
+      areaServed: "FR",
+      description: "Développement d'applications mobiles React Native et web Next.js performantes.",
+    },
+    {
+      "@type": "Service",
+      serviceType: "DevOps & Infrastructure Kubernetes",
+      provider: { "@type": "Person", name: "AyCode" },
+      areaServed: "FR",
+      description: "Pipelines CI/CD et infrastructure Kubernetes haute disponibilité.",
+    },
+  ],
+};
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={siteUrl} />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={siteUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</head>
+<body>
+  <slot />
+</body>
+</html>
