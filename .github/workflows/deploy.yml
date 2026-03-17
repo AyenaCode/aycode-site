@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      create_project:
+        description: 'Create Cloudflare Pages project (first time only)'
+        type: boolean
+        default: false
 
 jobs:
   deploy:
@@ -28,6 +34,13 @@ jobs:
         env:
           PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
           PUBLIC_FORMSPREE_ID: ${{ secrets.PUBLIC_FORMSPREE_ID }}
+
+      - name: Create Cloudflare Pages project (first time only)
+        if: ${{ inputs.create_project == true }}
+        run: npx wrangler pages project create aycode-site --production-branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy to Cloudflare Pages
         run: npx wrangler pages deploy dist --project-name=aycode-site --branch=main
