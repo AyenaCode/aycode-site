@@ -857,14 +857,14 @@ const stats = [
 
 const testimonials = [
   {
-    name: 'Client A',
+    name: 'Alpha Jsutin',
     role: 'CTO, Startup SaaS',
     text: '"AyCode a livré notre app mobile en un temps record. Code propre, communication parfaite."',
   },
   {
-    name: 'Client B',
+    name: 'Germain Kodjo',
     role: 'Fondateur, E-commerce',
-    text: '"Notre infra K8s tourne parfaitement depuis 6 mois. Zéro incident en prod."',
+    text: '"Notre infra K8s tourne parfaitement depuis 6 mois. aucun incident en prod."',
   },
 ];
 ---
