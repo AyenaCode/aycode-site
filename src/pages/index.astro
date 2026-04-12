@@ -17,9 +17,14 @@ import ContactForm from '../components/ContactForm.astro';
   </main>
 
   <footer class="py-10 px-6 text-center" style="border-top:1px solid rgba(255,255,255,0.05);">
-    <p class="text-sm" style="color:#475569;">
+    <p class="text-sm mb-3" style="color:#475569;">
       © 2026 <span class="gradient-text font-semibold">AyCode</span> — Agence Web & Mobile
     </p>
+    <div class="flex items-center justify-center gap-6 text-xs" style="color:#374151;">
+      <a href="/confidentialite" class="transition-colors duration-200 hover:text-slate-400">Politique de confidentialité</a>
+      <span>·</span>
+      <a href="/conditions-generales" class="transition-colors duration-200 hover:text-slate-400">Conditions générales</a>
+    </div>
   </footer>
 </Layout>
 
