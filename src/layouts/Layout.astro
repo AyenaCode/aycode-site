@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "AyCode — Développeur React Native, Next.js & DevOps Freelance",
-  description = "AyCode — Développeur freelance React Native, Next.js & DevOps (Kubernetes, CI/CD). Je transforme vos idées en produits mobiles et web qui scalent. Devis gratuit.",
+  title = "AyCode — Agence Web & Mobile francophone",
+  description = "AyCode — Agence de développement web & mobile. Nous livrons vos applications iOS, Android et web de A à Z, avec une équipe de développeurs francophones. Devis gratuit.",
 } = Astro.props;
 
 const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://aycode.dev';
@@ -18,25 +18,25 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Person",
+      "@type": "Organization",
       name: "AyCode",
-      jobTitle: "Développeur Freelance",
+      description: "Agence de développement web & mobile francophone",
       url: siteUrl,
-      knowsAbout: ["React Native", "Next.js", "Kubernetes", "CI/CD", "DevOps"],
+      knowsAbout: ["React Native", "Next.js", "iOS", "Android", "MVP", "Web App"],
     },
     {
       "@type": "Service",
-      serviceType: "Développement Mobile & Web",
-      provider: { "@type": "Person", name: "AyCode" },
+      serviceType: "Développement Mobile iOS & Android",
+      provider: { "@type": "Organization", name: "AyCode" },
       areaServed: "FR",
-      description: "Développement d'applications mobiles React Native et web Next.js performantes.",
+      description: "Développement d'applications mobiles iOS et Android par une équipe de développeurs francophones.",
     },
     {
       "@type": "Service",
-      serviceType: "DevOps & Infrastructure Kubernetes",
-      provider: { "@type": "Person", name: "AyCode" },
+      serviceType: "Développement Web & MVP",
+      provider: { "@type": "Organization", name: "AyCode" },
       areaServed: "FR",
-      description: "Pipelines CI/CD et infrastructure Kubernetes haute disponibilité.",
+      description: "Création de sites web, web apps et MVPs livrés rapidement avec un interlocuteur unique.",
     },
   ],
 };

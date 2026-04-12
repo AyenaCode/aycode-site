@@ -8,9 +8,9 @@
       <p class="text-sm font-medium uppercase tracking-widest mb-4" style="color:#ec4899;">Contact</p>
       <h2 class="font-display font-bold text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.5rem);">
         Décrivez votre projet —<br />
-        <span class="gradient-text">je vous réponds sous 24h.</span>
+        <span class="gradient-text">on vous répond sous 24h.</span>
       </h2>
-      <p style="color:#94a3b8;">Remplissez le formulaire ci-dessous pour démarrer la conversation.</p>
+      <p style="color:#94a3b8;">Remplissez le formulaire ci-dessous pour démarrer la conversation avec notre équipe.</p>
     </div>
 
     <div class="card-glass rounded-3xl p-8 md:p-12 gradient-border">
@@ -33,7 +33,7 @@
           <div class="mb-8">
             <label class="block text-sm font-medium mb-3" style="color:#94a3b8;">Type de projet</label>
             <div class="grid grid-cols-2 gap-3">
-              {['Application mobile', 'Site / Web App', 'DevOps & Infra', 'Full-stack'].map((t) => (
+              {['Application mobile', 'Site / Web App', 'MVP', 'Sur-mesure'].map((t) => (
                 <label class="type-option flex items-center gap-3 p-4 rounded-xl card-glass cursor-pointer transition-all duration-200 hover:border-cyan-500/40">
                   <input type="radio" name="project_type" value={t} class="sr-only" />
                   <span class="w-4 h-4 rounded-full border shrink-0 transition-all duration-200" style="border-color:#475569;" data-radio></span>
@@ -147,13 +147,13 @@
       <div id="form-success" class="hidden text-center py-8">
         <div class="text-6xl mb-4">🎉</div>
         <h3 class="font-display font-bold text-2xl text-white mb-3">Message envoyé !</h3>
-        <p style="color:#94a3b8;">Je vous réponds sous 24h. À très vite !</p>
+        <p style="color:#94a3b8;">Notre équipe vous répond sous 24h. À très vite !</p>
       </div>
 
       <!-- Error -->
       <div id="form-error" class="hidden mt-4 p-4 rounded-2xl text-sm text-center"
         style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#ec4899;">
-        Une erreur est survenue. Réessayez ou contactez-moi directement.
+        Une erreur est survenue. Réessayez ou contactez-nous directement.
       </div>
     </div>
   </div>
